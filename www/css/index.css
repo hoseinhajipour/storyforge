@@ -2,3 +2,22 @@
     width: 100%;
     height: 60vh;
 }
+
+.height_limit {
+    overflow-y: auto;
+    height: 90vh;
+}
+
+body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+.selected {
+    background-color: #80a7da;
+}
+
+.ui-state-default{
+    margin-top: 5px;
+
+}

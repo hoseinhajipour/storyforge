@@ -5,7 +5,8 @@
     "webPreferences": {
       "nodeIntegration": true,
       "contextIsolation": false,
-      "webSecurity": false
+      "webSecurity": false,
+      "preload": "file://{Directory}/preload.js"
     }
   }
 }

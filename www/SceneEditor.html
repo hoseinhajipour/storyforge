@@ -3,10 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-    <meta name="format-detection" content="telephone=no">
+          content="default-src *;
+                  style-src * 'self' 'unsafe-inline' 'unsafe-eval';
+                  script-src * 'self' 'unsafe-inline' 'unsafe-eval';">
+
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+
     <meta name="color-scheme" content="light dark">
 
     <script src="js/lib/babylon.js"></script>
@@ -21,6 +24,7 @@
 
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
@@ -35,23 +39,239 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-4">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary"><i class="fa fa-film"></i> Scene</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-comment"></i> Dialogue</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-file-alt"></i> Text Plate</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-bolt"></i> Action</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-volume-up"></i> Sound</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-music"></i> Music</button>
+    <div class="col-lg-4 col-12 order-lg-0 order-1">
+        <div class="btn-group w-100" role="group" aria-label="Basic example">
+            <button type="button" onclick="AppendNewScene()" class="btn btn-primary"><i class="fa fa-film  d-block"></i>
+                Scene
+            </button>
+            <button type="button" onclick="AppendNewDialogue()" class="btn btn-primary"><i
+                    class="fa fa-comment  d-block"></i>
+                Dialogue
+            </button>
+            <button type="button" onclick="AppendNewTextPlate()" class="btn btn-primary"><i
+                    class="fa fa-file-text d-block"></i> Text Plate
+            </button>
+            <button type="button" onclick="AppendNewAction()" class="btn btn-primary"><i
+                    class="fa fa-bolt  d-block"></i> Action
+            </button>
+            <button type="button" onclick="AppendNewSound()" class="btn btn-primary"><i
+                    class="fa fa-volume-up  d-block"></i> Sound
+            </button>
+            <button type="button" onclick="AppendNewMusic()" class="btn btn-primary"><i
+                    class="fa fa-music  d-block"></i> Music
+            </button>
         </div>
+
+        <div class="d-none">
+
+            <li id="Scene_sample" class="ui-state-default p-3" data-type="Scene">
+                <div class="row">
+                    <div class="col-10">
+                        <label>Scene: </label>
+                        <select name="Scene_id" class="form-control">
+                            <option value="">none</option>
+                        </select>
+
+                        <label>Character 01 : </label>
+                        <select name="dharacter_01_id" class="form-control">
+                            <option value="">none</option>
+                        </select>
+                        <label>Character 02 : </label>
+                        <select name="dharacter_01_id" class="form-control">
+                            <option value="">none</option>
+                        </select>
+
+                    </div>
+                    <div class="col-2">
+                        <span class="fa fa-camera"></span>
+                        <span class="fa fa-times"></span>
+                    </div>
+                </div>
+
+            </li>
+
+
+            <li id="TextPlate_sample" data-type="TextPlate" class="ui-state-default p-3">
+                <div class="row">
+                    <div class="col-10">
+                        <label>TextPlate Type: </label>
+                        <select name="TextPlate_Type" class="form-control">
+                            <option>none</option>
+                        </select>
+                        <textarea name="TextPlate_text" class="form-control"></textarea>
+                    </div>
+                    <div class="col-2">
+                        <span class="fa fa-times"></span>
+                    </div>
+                </div>
+
+            </li>
+
+
+            <li id="Action_sample" data-type="Action" class="ui-state-default p-3">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-6">
+                                <select name="character_id" class="form-control">
+                                    <option value="">none</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <select name="attack_id" class="form-control">
+                                    <option value="attack">attack</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <span class="fa fa-camera"></span>
+                        <span class="fa fa-times"></span>
+                    </div>
+                </div>
+
+            </li>
+
+
+            <li id="Sound_sample" data-type="Sound_sample" class="ui-state-default p-3">
+                <div class="row">
+                    <div class="col-10">
+                        <label>Sound Play : </label>
+                        <select name="Sound_url" class="form-control">
+                            <option value="">none</option>
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <span class="fa fa-times"></span>
+                    </div>
+                </div>
+
+            </li>
+
+            <li id="Music_sample" data-type="Music" class="ui-state-default p-3">
+                <div class="row">
+                    <div class="col-10">
+                        <label>Music Start : </label>
+                        <select name="Music_url" class="form-control">
+                            <option>none</option>
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <span class="fa fa-times"></span>
+                    </div>
+                </div>
+            </li>
+
+            <li id="Dialogue_sample" data-type="Dialogue" class="ui-state-default p-3">
+
+                <div class="row">
+                    <div class="col-6">
+                        <select name="character_id" class="form-control">
+                            <option value="">none</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <select name="emotion_id" class="form-control">
+                            <option>idle</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <textarea name="Dialogue_text" class="form-control"></textarea>
+                    </div>
+                    <div class="col-2">
+                        <span class="fa fa-camera"></span>
+                        <span class="fa fa-microphone"></span>
+                        <span class="fa fa-times"></span>
+                    </div>
+                </div>
+
+            </li>
+        </div>
+
+
+        <ul id="sortable" class="height_limit">
+
+        </ul>
     </div>
-    <div class="col-8">
+    <div class="col-lg-8 col-12 order-lg-1 order-0 ">
         <canvas id="renderCanvas"></canvas>
+
+        <button onclick="Generate()" class="btn btn-dark">Generate</button>
     </div>
 </div>
 <script src="cordova.js"></script>
 <script src="js/index.js"></script>
 <script src="js/Initbabylon.js"></script>
+<script>
 
+    function AppendNewScene() {
+        var newScene = $("#Scene_sample").clone();
+        $("#sortable").append(newScene);
+    }
+
+    function AppendNewTextPlate() {
+        var newTextPlate = $("#TextPlate_sample").clone();
+        $("#sortable").append(newTextPlate);
+    }
+
+    function AppendNewSound() {
+        var newSound = $("#Sound_sample").clone();
+        $("#sortable").append(newSound);
+    }
+
+    function AppendNewAction() {
+        var newAction = $("#Action_sample").clone();
+        $("#sortable").append(newAction);
+    }
+
+    function AppendNewMusic() {
+        var newMusic = $("#Music_sample").clone();
+        $("#sortable").append(newMusic);
+    }
+
+    function AppendNewDialogue() {
+        var newDialogue = $("#Dialogue_sample").clone();
+        $("#sortable").append(newDialogue);
+    }
+
+    $(function () {
+        $("#sortable").sortable({
+            placeholder: "ui-state-highlight"
+        });
+
+
+        $("#sortable").on("click", "li", function () {
+            $("#sortable li").removeClass("selected");
+            $(this).addClass("selected");
+        });
+
+        $("#sortable").on("click", ".fa-times", function () {
+            $(this).closest("li").remove();
+        });
+    });
+
+    function Generate() {
+
+        var result = [];
+
+        $("#sortable li").each(function() {
+
+            var item = {};
+            item.type = $(this).data("type");
+
+            $(this).find("textarea, select, input").each(function() {
+                item[$(this).attr("name")] = $(this).val();
+            });
+
+            result.push(item);
+
+        });
+
+        console.log(JSON.stringify(result, null, 2));
+
+    }
+</script>
 </body>
 </html>
