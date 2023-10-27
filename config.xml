@@ -6,8 +6,9 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <access origin="*" />
 
     <platform name="electron">
         <preference name="ElectronSettingsFilePath" value="res/electron/settings.json" />
