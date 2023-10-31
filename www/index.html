@@ -31,5 +31,15 @@
 
 <script src="cordova.js"></script>
 <script src="js/index.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var includes = $('[data-include]')
+        $.each(includes, function () {
+            var file = "component/" + $(this).data('include') + '.html'
+            $(this).load(file)
+        });
+    });
+</script>
 </body>
 </html>

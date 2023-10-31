@@ -67,10 +67,12 @@
             <li id="Scene_sample" class="ui-state-default p-3" data-type="Scene">
                 <div class="row">
                     <div class="col-10">
-                        <label>Scene: </label>
-                        <select name="Scene_id" class="form-control">
-                            <option value="">none</option>
-                        </select>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SceneModal">
+                            Select Scene
+                        </button>
+                        <input type="hidden" name="Scene_id">
+
+                        <br/>
 
                         <label>Character 01 : </label>
                         <select name="dharacter_01_id" class="form-control">
@@ -197,10 +199,11 @@
     </div>
     <div class="col-lg-8 col-12 order-lg-1 order-0 ">
         <canvas id="renderCanvas"></canvas>
-
         <button onclick="Generate()" class="btn btn-dark">Generate</button>
     </div>
 </div>
+<div data-include="SceneModal"></div>
+
 <script src="cordova.js"></script>
 <script src="js/index.js"></script>
 <script src="js/Initbabylon.js"></script>
@@ -272,6 +275,16 @@
         console.log(JSON.stringify(result, null, 2));
 
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        var includes = $('[data-include]')
+        $.each(includes, function () {
+            var file = "component/" + $(this).data('include') + '.html'
+            $(this).load(file)
+        });
+    });
 </script>
 </body>
 </html>
