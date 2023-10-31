@@ -67,7 +67,7 @@
             <li id="Scene_sample" class="ui-state-default p-3" data-type="Scene">
                 <div class="row">
                     <div class="col-10">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SceneModal">
+                        <button type="button" class="btn btn-primary" onclick="OpenSceneModal()">
                             Select Scene
                         </button>
                         <input type="hidden" name="Scene_id">
@@ -202,7 +202,9 @@
         <button onclick="Generate()" class="btn btn-dark">Generate</button>
     </div>
 </div>
+
 <div data-include="SceneModal"></div>
+<div data-include="CharacterModal"></div>
 
 <script src="cordova.js"></script>
 <script src="js/index.js"></script>

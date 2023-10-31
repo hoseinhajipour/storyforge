@@ -1,6 +1,6 @@
 <div>
 
-    <div class="modal  fade" id="SceneModal" tabindex="-1" aria-labelledby="SceneModal" aria-hidden="true">
+    <div class="modal  fade" id="CharcterModal" tabindex="-1" aria-labelledby="CharcterModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="scene-data" class="row"></div>
+                    <div id="characters-data" class="row"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -21,24 +21,24 @@
     <script>
         var baseUrl = "http://127.0.0.1:8000/";
 
-        function OpenSceneModal() {
-            $("#SceneModal").modal('show');
+        function OpenModal() {
+            $("#CharcterModal").modal('show');
 
             $.ajax({
-                url: "http://127.0.0.1:8000/api/scenes",
+                url: "http://127.0.0.1:8000/api/characters",
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
                     // Iterate through the data and create HTML elements to display it
                     var html = "";
-                    $.each(data, function (index, scene) {
-                        html += "<div class='scene-item col-lg-4 col-6' onclick='SelectScene(\"" + scene.file + "\")'>";
-                        html += "<img src='" + baseUrl + "storage/" + scene.icon + "' alt='Icon' width='100%'>";
-                        html += "<p>" + scene.name + "</p>";
+                    $.each(data, function (index, character) {
+                        html += "<div class='character-item col-lg-4 col-6' onclick='Selectcharacter(\"" + character.file + "\")'>";
+                        html += "<img src='" + baseUrl + "storage/" + character.icon + "' alt='Icon' width='100%'>";
+                        html += "<p>" + character.name + "</p>";
                         html += "</div>";
                     });
-                    // Display the HTML content in the #scene-data element
-                    $("#scene-data").html(html);
+                    // Display the HTML content in the #character-data element
+                    $("#characters-data").html(html);
                 },
                 error: function (error) {
                     console.log("Error fetching data: " + error);
@@ -46,7 +46,7 @@
             });
         }
 
-        function SelectScene(Url) {
+        function Selectcharacter(Url) {
             console.log(Url);
         }
     </script>
